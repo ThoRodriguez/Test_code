@@ -1,0 +1,62 @@
+---
+title: "TD Rmarkdown"
+output: 
+  html_document:
+    toc: TRUE
+    code_folding: "hide"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) #ce chunk contient les valeurs par défaut des autres
+knitr::opts_chunk$set(warning = FALSE) #important pour ne pas afficher les messages etc
+knitr::opts_chunk$set(message = FALSE)
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r library, echo = FALSE} 
+library(ggplot2)
+library(dplyr)
+library(gapminder)
+library(hrbrthemes)
+library(plotly)
+library(forcats)
+
+library(DT)
+library(devtools)
+library(epuRate)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r bitcoin, fig.align="center"}
+
+
+
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum.csv", header=TRUE, sep=",")
+
+summary(data)
+head(data)
+
+data%>%
+  filter(Value !="NA")%>% #ou filter(!is.na(value)) ou drop.na()
+  mutate(Country = fct_reorder(Country, Value))%>%
+  ggplot(aes(x=Country,y=Value,fill=Country)) + #une couleur par pays
+  geom_segment(aes(x=Country, xend=Country, y=0, yend=Value))+
+  geom_point(size=2) +
+  coord_flip()
+```
+
+```{r tableau interactif}
+
+datatable(mtcars,rownames=FALSE,filter="top",options=list(pageLength=5,scrollX=T))
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
