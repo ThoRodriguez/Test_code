@@ -7,7 +7,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE) #ce chunk contient les valeurs par défaut des autres
+knitr::opts_chunk$set(echo = TRUE) #ce chunk contient les valeurs par dÃ©faut des autres
 knitr::opts_chunk$set(warning = FALSE) #important pour ne pas afficher les messages etc
 knitr::opts_chunk$set(message = FALSE)
 
